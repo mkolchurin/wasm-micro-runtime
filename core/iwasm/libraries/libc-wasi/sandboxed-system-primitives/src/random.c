@@ -49,6 +49,14 @@ random_buf(void *buf, size_t len)
     return __WASI_ESUCCESS;
 }
 
+#elif defined(BH_PLATFORM_ZEPHYR)
+
+__wasi_errno_t
+random_buf(void *buf, size_t len)
+{
+    sys_rand_get(buf, len);
+    return __WASI_ESUCCESS;
+}
 #elif defined(BH_PLATFORM_WINDOWS)
 
 #include <bcrypt.h>

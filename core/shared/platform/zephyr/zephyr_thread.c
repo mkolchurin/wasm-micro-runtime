@@ -577,4 +577,54 @@ os_thread_get_stack_boundary()
 
 void
 os_thread_jit_write_protect_np(bool enabled)
-{}
+{
+}
+
+int
+os_thread_detach(korp_tid)
+{
+    return BHT_ERROR;
+}
+
+void
+os_thread_exit(void *retval)
+{
+    (void)retval;
+    k_thread_abort(k_current_get());
+    os_thread_cleanup();
+}
+
+int
+os_rwlock_init(korp_rwlock *lock)
+{
+    (void)lock;
+    return BHT_ERROR;
+}
+
+int
+os_rwlock_unlock(korp_rwlock *lock)
+{
+    (void)lock;
+    return BHT_ERROR;
+}
+
+int
+os_rwlock_wrlock(korp_rwlock *lock)
+{
+    (void)lock;
+    return BHT_ERROR;
+}
+
+int
+os_rwlock_rdlock(korp_rwlock *lock)
+{
+    (void)lock;
+    return BHT_ERROR;
+}
+
+int
+os_rwlock_destroy(korp_rwlock *lock)
+{
+    (void)lock;
+    return BHT_ERROR;
+}

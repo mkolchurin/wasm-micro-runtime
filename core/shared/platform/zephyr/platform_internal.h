@@ -31,6 +31,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <time.h>
+#include <math.h>
 
 #ifndef CONFIG_NET_BUF_USER_DATA_SIZE
 #define CONFIG_NET_BUF_USER_DATA_SIZE 0
@@ -60,6 +62,24 @@
 #endif
 #endif
 
+// #if defined(CONFIG_PICOLIBC)
+// #undef signbit
+#define nfds_t long
+#define CLOCK_THREAD_CPUTIME_ID 3
+#include <zephyr/posix/time.h>
+// #include <zephyr/posix/sys/socket.h>
+#include <zephyr/net/socket.h>
+#include <zephyr/posix/sys/ioctl.h>
+#include <zephyr/posix/fcntl.h>
+#include <zephyr/posix/pthread.h>
+#include <zephyr/posix/dirent.h>
+#include <zephyr/posix/unistd.h>
+#include <assert.h>
+#include <zephyr/random/random.h>
+
+
+// #endif
+
 #ifndef BH_PLATFORM_ZEPHYR
 #define BH_PLATFORM_ZEPHYR
 #endif
@@ -73,6 +93,8 @@ typedef struct k_thread korp_thread;
 typedef korp_thread *korp_tid;
 typedef struct k_mutex korp_mutex;
 typedef unsigned int korp_sem;
+
+#define UTIME_NOW ((1l << 30) - 1l)
 
 /* korp_rwlock is used in platform_api_extension.h,
    we just define the type to make the compiler happy */
@@ -97,28 +119,28 @@ size_t strspn(const char *s, const char *accept);
 size_t strcspn(const char *s, const char *reject);
 
 /* math functions which are not provided by os */
-double atan(double x);
-double atan2(double y, double x);
-double sqrt(double x);
-double floor(double x);
-double ceil(double x);
-double fmin(double x, double y);
-double fmax(double x, double y);
-double rint(double x);
-double fabs(double x);
-double trunc(double x);
-float sqrtf(float x);
-float floorf(float x);
-float ceilf(float x);
-float fminf(float x, float y);
-float fmaxf(float x, float y);
-float rintf(float x);
-float fabsf(float x);
-float truncf(float x);
-int signbit(double x);
-int isnan(double x);
-double pow(double x, double y);
-double scalbn(double x, int n);
+//double atan(double x);
+//double atan2(double y, double x);
+//double sqrt(double x);
+//double floor(double x);
+//double ceil(double x);
+//double fmin(double x, double y);
+//double fmax(double x, double y);
+//double rint(double x);
+//double fabs(double x);
+//double trunc(double x);
+//float sqrtf(float x);
+//float floorf(float x);
+//float ceilf(float x);
+//float fminf(float x, float y);
+//float fmaxf(float x, float y);
+//float rintf(float x);
+//float fabsf(float x);
+//float truncf(float x);
+//int signbit(double x);
+//int isnan(double x);
+//double pow(double x, double y);
+//double scalbn(double x, int n);
 
 unsigned long long int strtoull(const char *nptr, char **endptr, int base);
 double strtod(const char *nptr, char **endptr);
