@@ -74,10 +74,45 @@
 #include <zephyr/posix/pthread.h>
 #include <zephyr/posix/dirent.h>
 #include <zephyr/posix/unistd.h>
+#include <zephyr/posix/poll.h>
+#include <zephyr/posix/sys/stat.h>
+#include <zephyr/posix/net/if.h>
 #include <assert.h>
 #include <zephyr/random/random.h>
+#include <sys/_default_fcntl.h>
+#define getpagesize() 0 //sysconf(_SC_PAGESIZE)
 
+#define IP_MULTICAST_LOOP 7
+#define UTIME_NOW -2L
+#define UTIME_OMIT -1L
+#define AT_SYMLINK_NOFOLLOW 2
+#define AT_SYMLINK_FOLLOW 4
+#define O_DIRECTORY _FDIRECTORY
+#define O_NOFOLLOW _FNOFOLLOW
+#define AT_REMOVEDIR 0
 
+#define DT_UNKNOWN 0
+#define DT_FIFO 1
+#define DT_CHR 2
+#define DT_DIR 4
+#define DT_BLK 6
+#define DT_REG 8
+#define DT_LNK 10
+#define DT_SOCK 12
+#define DT_WHT 14
+
+// struct dirent {
+//     unsigned int d_ino;
+//     char d_name[PATH_MAX + 1];
+//     off_t d_off;
+//     unsigned short d_reclen;
+//     unsigned char d_type;
+// };
+
+struct ip_mreq {
+    struct in_addr imr_multiaddr; /* IP multicast address of group */
+    struct in_addr imr_interface; /* local IP address of interface */
+};
 // #endif
 
 #ifndef BH_PLATFORM_ZEPHYR

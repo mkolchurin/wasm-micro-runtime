@@ -7,38 +7,38 @@
 #include "libc_errno.h"
 #include <unistd.h>
 
-#if !defined(__APPLE__) && !defined(ESP_PLATFORM)
-#define CONFIG_HAS_PWRITEV 1
-#define CONFIG_HAS_PREADV 1
-#else
+//#if !defined(__APPLE__) && !defined(ESP_PLATFORM)
+//#define CONFIG_HAS_PWRITEV 1
+//#define CONFIG_HAS_PREADV 1
+//#else
 #define CONFIG_HAS_PWRITEV 0
 #define CONFIG_HAS_PREADV 0
-#endif
+//#endif
 
-#if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(ESP_PLATFORM)
-#define CONFIG_HAS_FDATASYNC 1
-#else
+//#if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(ESP_PLATFORM)
+//#define CONFIG_HAS_FDATASYNC 1
+//#else
 #define CONFIG_HAS_FDATASYNC 0
-#endif
+//#endif
 
 /*
  * For NuttX, CONFIG_HAS_ISATTY is provided by its platform header.
  * (platform_internal.h)
  */
-#if !defined(CONFIG_HAS_D_INO)
-#if !defined(__NuttX__)
-#define CONFIG_HAS_D_INO 1
-#define CONFIG_HAS_ISATTY 1
-#else
+//#if !defined(CONFIG_HAS_D_INO)
+//#if !defined(__NuttX__)
+//#define CONFIG_HAS_D_INO 1
+//#define CONFIG_HAS_ISATTY 1
+//#else
 #define CONFIG_HAS_D_INO 0
-#endif
-#endif
+//#endif
+//#endif
 
-#if !defined(__APPLE__) && !defined(ESP_PLATFORM) && !defined(__COSMOPOLITAN__)
-#define CONFIG_HAS_POSIX_FALLOCATE 1
-#else
+//#if !defined(__APPLE__) && !defined(ESP_PLATFORM) && !defined(__COSMOPOLITAN__)
+//#define CONFIG_HAS_POSIX_FALLOCATE 1
+//#else
 #define CONFIG_HAS_POSIX_FALLOCATE 0
-#endif
+//#endif
 
 #if defined(O_DSYNC)
 #define CONFIG_HAS_O_DSYNC
@@ -936,35 +936,35 @@ os_readdir(os_dir_stream dir_stream, __wasi_dirent_t *entry,
     entry->d_ino = 0;
 #endif
 
-    switch (dent->d_type) {
-        case DT_BLK:
-            entry->d_type = __WASI_FILETYPE_BLOCK_DEVICE;
-            break;
-        case DT_CHR:
-            entry->d_type = __WASI_FILETYPE_CHARACTER_DEVICE;
-            break;
-        case DT_DIR:
-            entry->d_type = __WASI_FILETYPE_DIRECTORY;
-            break;
-        case DT_FIFO:
-            entry->d_type = __WASI_FILETYPE_SOCKET_STREAM;
-            break;
-        case DT_LNK:
-            entry->d_type = __WASI_FILETYPE_SYMBOLIC_LINK;
-            break;
-        case DT_REG:
-            entry->d_type = __WASI_FILETYPE_REGULAR_FILE;
-            break;
-#ifdef DT_SOCK
-        case DT_SOCK:
-            // Technically not correct, but good enough.
-            entry->d_type = __WASI_FILETYPE_SOCKET_STREAM;
-            break;
-#endif
-        default:
-            entry->d_type = __WASI_FILETYPE_UNKNOWN;
-            break;
-    }
+//    switch (dent->d_type) {
+//        case DT_BLK:
+//            entry->d_type = __WASI_FILETYPE_BLOCK_DEVICE;
+//            break;
+//        case DT_CHR:
+//            entry->d_type = __WASI_FILETYPE_CHARACTER_DEVICE;
+//            break;
+//        case DT_DIR:
+//            entry->d_type = __WASI_FILETYPE_DIRECTORY;
+//            break;
+//        case DT_FIFO:
+//            entry->d_type = __WASI_FILETYPE_SOCKET_STREAM;
+//            break;
+//        case DT_LNK:
+//            entry->d_type = __WASI_FILETYPE_SYMBOLIC_LINK;
+//            break;
+//        case DT_REG:
+//            entry->d_type = __WASI_FILETYPE_REGULAR_FILE;
+//            break;
+//#ifdef DT_SOCK
+//        case DT_SOCK:
+//            // Technically not correct, but good enough.
+//            entry->d_type = __WASI_FILETYPE_SOCKET_STREAM;
+//            break;
+//#endif
+//        default:
+//            entry->d_type = __WASI_FILETYPE_UNKNOWN;
+//            break;
+//    }
 
     return __WASI_ESUCCESS;
 }
